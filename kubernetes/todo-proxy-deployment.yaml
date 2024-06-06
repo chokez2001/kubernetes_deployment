@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose-windows-amd64.exe --file docker-compose.yml convert
+    kompose.version: 1.33.0 (3ce457399)
+  labels:
+    io.kompose.service: todo-proxy
+  name: todo-proxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: todo-proxy
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose-windows-amd64.exe --file docker-compose.yml convert
+        kompose.version: 1.33.0 (3ce457399)
+      labels:
+        io.kompose.service: todo-proxy
+    spec:
+      containers:
+        - image: todo-react-flask-pgsql-todo-proxy:latest
+          imagePullPolicy: IfNotPresent
+          name: todo-proxy
+          ports:
+            - containerPort: 80
+              protocol: TCP
+      restartPolicy: Always

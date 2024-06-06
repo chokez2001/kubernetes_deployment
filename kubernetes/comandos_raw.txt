@@ -1,0 +1,78 @@
+kubectl get deployments --all-namespaces
+
+kubectl delete deployment DEPLOYMENT
+
+
+kubectl delete --all pods 
+
+
+kubectl apply -f .
+
+
+minikube image load todo-react-flask-pgsql-todo-ui:latest
+
+
+minikube image list 
+
+kubectl get deployments,services,jobs                 -o wide
+
+
+
+minikube service todo-proxy
+
+minikube dashboard
+
+
+kubectl port-forward --address=0.0.0.0 service/todo-proxy 3000:3000
+
+
+kubectl get hpa
+
+
+minikube addons enable metrics-server
+
+
+kubectl top pods
+
+kubectl get hpa
+
+kubectl describe hpa
+
+minikube addons list
+
+
+
+kubectl api-versions
+
+
+kubectl run -i --tty load-generator --rm --image=busybox:1.28 --restart=Never -- /bin/sh -c "while sleep 0.001; do wget -q -O- http://todo-app:8000/api/tasks; done"
+
+
+
+minikube start --kubernetes-version=v1.23.0 --memory=6g --bootstrapper=kubeadm --extra-config=kubelet.authentication-token-webhook=true --extra-config=kubelet.authorization-mode=Webhook --extra-config=scheduler.bind-address=0.0.0.0 --extra-config=controller-manager.bind-address=0.0.0.0
+
+https://medium.com/@brightband/deploying-prometheus-operator-to-a-kubernetes-cluster-c2378038c79b
+
+choco install kubernetes-helm
+
+
+kubectl create namespace monitoring
+
+
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo add stable https://charts.helm.sh/stable
+helm repo update
+
+helm install prometheus-operator prometheus-community/kube-prometheus-stack -n monitoring
+
+
+kubectl port-forward svc/prometheus-operator-kube-p-prometheus -n monitoring 9090:9090
+
+
+
+
+kubectl exec -it pod/todo-db-7f8d96d57d-fsrsv -- bash
+
+psql -h 127.0.0.1 -U tododbuser -d tododb
+\dt
+select * from tasks;

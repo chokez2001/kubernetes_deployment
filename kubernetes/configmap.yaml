@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: todo-app-config
+data:
+  DATABASE_URL: "postgresql://user:password@todo-db:5432/todo"
+  PYTHONUNBUFFERED: "true"
+  POSTGRES_DB: "tododb"
+  POSTGRES_PASSWORD: "tododbpassword"
+  POSTGRES_USER: "tododbuser"
+
+
+
